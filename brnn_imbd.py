@@ -78,7 +78,7 @@ Epoch 4/4
 25000/25000 [==============================] - 1065s - loss: 0.0672 - acc: 0.9786 - val_loss: 0.5635 - val_acc: 0.8363
 
 
-Validation data is the test data--looks like this model uses the same data for training :(
+Validation data = test data
 If training data accuracy (acc) keeps improving while validation data accuracy (val_acc) 
 gets worse, you are likely in an overfitting situation,
 
