@@ -168,4 +168,12 @@ Keras was initially developed as part of the research effort of project ONEIROS 
 >_"Oneiroi are beyond our unravelling --who can be sure what tale they tell? Not all that men look for comes to pass. Two gates there are that give passage to fleeting Oneiroi; one is made of horn, one of ivory. The Oneiroi that pass through sawn ivory are deceitful, bearing a message that will not be fulfilled; those that come out through polished horn have truth behind them, to be accomplished for men who see them."_ Homer, Odyssey 19. 562 ff (Shewring translation).
 
 ------------------
-cd ../../
+
+## My Notes:
+
+Want high val acc or low val loss - the loss is the errors made in that set - I used crossentropy for addition_rnn, often 
+people use MSE - mean squared errors to calculate loss
+
+If training acc or loss is getting better and test acc/loss is not => overfitting to training data
+
+cd ../../ go up two

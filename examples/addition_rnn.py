@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+# With LSTM RNN, 50K train, at iteration 62, training data loss: 0.0026 - acc: 0.9999 - validation/test set loss: 0.0042 - val_acc: 0.9993
+# With GRU RNN, 50K train, at iteration 51, training data loss: 0.0030 - acc: 0.9997 - val_loss: 0.0092 - val_acc: 0.9976
+
+
 '''An implementation of sequence to sequence learning for performing addition
 Input: "535+61"
 Output: "596"
@@ -69,8 +74,8 @@ class colors:
 TRAINING_SIZE = 50000
 DIGITS = 3
 INVERT = True
-# Try replacing GRU, or SimpleRNN
-RNN = recurrent.LSTM
+# Try replacing with SimpleRNN, already tried LSTM
+RNN = recurrent.GRU
 HIDDEN_SIZE = 128
 BATCH_SIZE = 128
 LAYERS = 1
@@ -118,7 +123,7 @@ np.random.shuffle(indices)
 X = X[indices]
 y = y[indices]
 
-# Explicitly set apart 10% for validation data that we never train over
+# Explicitly set apart 10% for validation data that we never train over--this is just taking the last 10% in data set - not random
 split_at = len(X) - len(X) / 10
 (X_train, X_val) = (slice_X(X, 0, split_at), slice_X(X, split_at))
 (y_train, y_val) = (y[:split_at], y[split_at:])
@@ -151,7 +156,7 @@ for iteration in range(1, 200):
     print()
     print('-' * 50)
     print('Iteration', iteration)
-    model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=1,
+    model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=1, # This is the actual training - only one epoch, many iterations
               validation_data=(X_val, y_val))
     ###
     # Select 10 samples from the validation set at random so we can visualize errors
@@ -163,6 +168,7 @@ for iteration in range(1, 200):
         correct = ctable.decode(rowy[0])
         guess = ctable.decode(preds[0], calc_argmax=False)
         print('Q', q[::-1] if INVERT else q)
-        print('T', correct)
+        print('A', correct)
         print(colors.ok + '☑' + colors.close if correct == guess else colors.fail + '☒' + colors.close, guess)
         print('---')
+
