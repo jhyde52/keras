@@ -1,9 +1,10 @@
 '''
-TODO: Build bidrectional LSTM to classify hate speech
+TODO: Build bi-drectional recurrent neural network (BRNN) to classify hate speech
+Specifically, a bi-directional long short-term memory (LSTM) network
 Backend: Tensorflow
 Dataset: https://www.crowdflower.com/data-for-everyone/
 Twitter
-Contributors viewed short text and identified if it a) contained hate speech, b) was offensive but without hate speech, 
+3 contributors viewed short text and identified if it a) contained hate speech, b) was offensive but without hate speech, 
 or c) was not offensive at all. Contains nearly 15K rows with three contributor judgments per text string.
 '''
 
@@ -12,6 +13,8 @@ from keras.layers import Input, Dense, Embedding, LSTM, Bidirectional, Dropout
 import numpy as np
 
 np.random.seed()
+
+
 
 # import Dataset 'twitter_hate.csv'
 
@@ -25,14 +28,18 @@ print (len(y_test), 'negative test sequences')
 
 
 
-model = Sequential
-model.add(Embedding(###))
-model.add(Bidirectional(LSTM(#64)))
-model.add(Dropout(0.5))
-model.add(Dense(#1, activation='Sigmoid'))
+model = Sequential([
+Embedding(1000, 64, input_length=10), #vocab size, batch, input_length
+Bidirectional(LSTM(64),
+Dropout(0.5))
+Dense(1, activation='Sigmoid') # a layer where each unit or neuron is connected to each neuron in the next layer
+]),
 
+input_array = np.random.randint(1000, size=(32, 10))
 
-model.compile(#)
+model.compile('rmsprop', 'mse')
+output_array = model.predict(input_array)
+assert output_array.shape == (32, 10, 64)
 
 print ('Training...')
 model.fit(x_train, y_train, 
