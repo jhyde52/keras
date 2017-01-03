@@ -177,3 +177,9 @@ people use MSE - mean squared errors to calculate loss
 If training acc or loss is getting better and test acc/loss is not => overfitting to training data
 
 cd ../../ go up two
+
+
+
+
+
+
